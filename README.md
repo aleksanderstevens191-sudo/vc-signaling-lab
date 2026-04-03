@@ -1,5 +1,6 @@
 ## What is this?
 
+This project explores how investors make decisions under uncertainty — a core problem in venture capital, private equity, and financial markets.
 This project simulates how venture capitalists decide whether to invest in startups when they cannot directly observe true company quality.
 
 Startups send signals (like traction or pitch quality), and investors update their beliefs using Bayesian inference before deciding to invest.
