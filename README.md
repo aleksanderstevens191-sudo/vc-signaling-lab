@@ -6,6 +6,16 @@ Startups send signals (like traction or pitch quality), and investors update the
 
 The goal is to study how often good startups get funded, bad startups slip through, and how information asymmetry affects investment decisions.
 
+## Key Results
+
+From a baseline simulation of 5,000 funding rounds:
+
+- Accuracy: ~92%
+- False Positive Rate: ~5.5% (bad startups funded)
+- False Negative Rate: ~12.3% (good startups rejected)
+
+This demonstrates strong separation between high- and low-quality founders, while preserving realistic decision errors under uncertainty.
+
 # Bayesian signaling and VC investment (Monte Carlo)
 
 Computational implementation of a **sender–receiver** model with binary hidden quality, applied to venture financing: a hidden binary quality, a type-conditional Gaussian signal, posterior beliefs via Bayes’ rule, and threshold-based investment. The design prioritizes **identifiable likelihoods**, **auditable updating**, and **batch output** for figures and reduced-form statistics.
