@@ -1,3 +1,11 @@
+## What is this?
+
+This project simulates how venture capitalists decide whether to invest in startups when they cannot directly observe true company quality.
+
+Startups send signals (like traction or pitch quality), and investors update their beliefs using Bayesian inference before deciding to invest.
+
+The goal is to study how often good startups get funded, bad startups slip through, and how information asymmetry affects investment decisions.
+
 # Bayesian signaling and VC investment (Monte Carlo)
 
 Computational implementation of a **sender–receiver** model with binary hidden quality, applied to venture financing: a hidden binary quality, a type-conditional Gaussian signal, posterior beliefs via Bayes’ rule, and threshold-based investment. The design prioritizes **identifiable likelihoods**, **auditable updating**, and **batch output** for figures and reduced-form statistics.
