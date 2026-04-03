@@ -16,7 +16,8 @@ From a baseline simulation of 5,000 funding rounds:
 
 This demonstrates strong separation between high- and low-quality founders, while preserving realistic decision errors under uncertainty.
 
-# Bayesian signaling and VC investment (Monte Carlo)
+# VC Signaling Lab
+### A game-theoretic simulation of startup fundraising under asymmetric information
 
 Computational implementation of a **sender–receiver** model with binary hidden quality, applied to venture financing: a hidden binary quality, a type-conditional Gaussian signal, posterior beliefs via Bayes’ rule, and threshold-based investment. The design prioritizes **identifiable likelihoods**, **auditable updating**, and **batch output** for figures and reduced-form statistics.
 
