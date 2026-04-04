@@ -26,9 +26,25 @@ Computational implementation of a **sender–receiver** model with binary hidden
 
 ## Overview
 
-Each round samples a founder type \(\theta \in \{\text{high}, \text{low}\}\) from a fixed prior. Conditional on \(\theta\), a scalar signal \(s\) is drawn from a normal distribution with type-specific mean and common variance. The VC does not observe \(\theta\); inference proceeds from \(s\) under the **correctly specified** signal law and prior. The default policy invests when the posterior probability of high quality exceeds an exogenous cutoff; the implementation also reports **expected return** conditional on \(s\) under the induced posterior.
+## Bayesian updating
 
-Founder payoffs combine investment benefit with a **quadratic signaling cost** whose slope may differ by type, consistent with heterogeneous cost of mimicking high signals. The environment supports optional **market** shifts to the effective prior and threshold (`game/environment.py`), enabling comparative statics without changing the core likelihood structure.
+Let $\pi_h = P(\theta = \text{high})$. After observing signal $s$, the VC computes the posterior probability that the founder is high quality:
+
+$$
+P(\theta = \text{high} \mid s)
+=
+\frac{p(s \mid \text{high}) \, \pi_h}{p(s)},
+\qquad
+p(s)
+=
+p(s \mid \text{high}) \, \pi_h
++
+p(s \mid \text{low}) \, (1 - \pi_h).
+$$
+
+In code, $p(s \mid \theta)$ is modeled as a Gaussian density with mean $\mu_\theta$ and variance $\sigma^2$. The posterior is computed explicitly from the likelihoods and the prior (see `game/vc.py`).
+
+The baseline investment rule compares $P(\theta = \text{high} \mid s)$ to a threshold in $[0,1]$. Alternative decision rules can instead be based on $\mathbb{E}[\text{net return} \mid s]$ using the same posterior.
 
 ---
 
