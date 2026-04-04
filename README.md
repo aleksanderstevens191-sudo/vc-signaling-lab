@@ -10,13 +10,12 @@ This project explores how investors make decisions under uncertainty, a core pro
 
 It simulates how venture capitalists decide whether to invest in startups when they cannot directly observe true company quality.
 
-Startups send signals (such as traction or pitch quality), and investors update their beliefs using Bayesian inference before deciding whether to invest.
+Startups send signals such as traction or pitch quality, and investors update their beliefs using Bayesian inference before deciding whether to invest.
 
 The goal is to study:
-
-* how often good startups get funded
-* how often bad startups slip through
-* how information asymmetry affects investment decisions
+- how often good startups get funded
+- how often bad startups slip through
+- how information asymmetry affects investment decisions
 
 ---
 
@@ -24,9 +23,9 @@ The goal is to study:
 
 From a baseline simulation of 5,000 funding rounds:
 
-* Accuracy: ~92%
-* False Positive Rate: ~5.5% (bad startups funded)
-* False Negative Rate: ~12.3% (good startups rejected)
+- Accuracy: ~92%
+- False Positive Rate: ~5.5% (bad startups funded)
+- False Negative Rate: ~12.3% (good startups rejected)
 
 This demonstrates strong separation between high- and low-quality founders while preserving realistic decision errors under uncertainty.
 
@@ -34,21 +33,23 @@ This demonstrates strong separation between high- and low-quality founders while
 
 ## Overview
 
-The model is a **sender–receiver game** with asymmetric information:
+The model is a **sender–receiver game** with asymmetric information.
 
-* The founder has a hidden type:
-  $$
-  \theta \in {\text{high}, \text{low}}
-  $$
+The founder has a hidden type:
 
-* A signal $s$ is generated from a type-dependent normal distribution:
-  $$
-  s \sim \mathcal{N}(\mu_\theta, \sigma^2)
-  $$
+$$
+\theta \in \{\text{high}, \text{low}\}
+$$
 
-* The VC observes $s$ but not $\theta$, and must infer quality.
+A signal $s$ is generated from a type-dependent normal distribution:
 
-Investment decisions are made using posterior beliefs derived from Bayes’ rule.
+$$
+s \sim \mathcal{N}(\mu_\theta, \sigma^2)
+$$
+
+The VC observes $s$ but not $\theta$, and must infer quality.
+
+Investment decisions are made using posterior beliefs derived from Bayes' rule.
 
 ---
 
@@ -64,8 +65,7 @@ After observing signal $s$, the VC computes:
 
 $$
 P(\theta = \text{high} \mid s)
-==============================
-
+=
 \frac{p(s \mid \text{high}) \cdot \pi_h}{p(s)}
 $$
 
@@ -73,8 +73,7 @@ where
 
 $$
 p(s)
-====
-
+=
 p(s \mid \text{high}) \cdot \pi_h
 +
 p(s \mid \text{low}) \cdot (1 - \pi_h)
@@ -110,23 +109,22 @@ $$
 
 This model belongs to the class of **games with one-sided incomplete information**:
 
-* Founder observes $\theta$
-* Investor observes only $s$
-* Beliefs are updated via Bayesian inference
+- Founder observes $\theta$
+- Investor observes only $s$
+- Beliefs are updated via Bayesian inference
 
 Because signal distributions overlap, perfect separation is impossible. This creates realistic:
-
-* false positives
-* false negatives
-* probabilistic decision-making
+- false positives
+- false negatives
+- probabilistic decision-making
 
 ---
 
 ## Asymmetric Information and Signaling
 
-* $\theta$ is private information
-* $s$ is informative but noisy
-* Investors form posterior beliefs using $(s, \pi)$
+- $\theta$ is private information
+- $s$ is informative but noisy
+- Investors form posterior beliefs using $(s, \pi)$
 
 Signaling arises from the dependence:
 
@@ -140,7 +138,7 @@ Extensions can allow founders to **strategically choose signals**, introducing c
 
 ## Repository Layout
 
-```
+```text
 vc-game-theory-simulator/
 ├── main.py
 ├── requirements.txt
@@ -156,66 +154,3 @@ vc-game-theory-simulator/
     ├── founder.py
     ├── vc.py
     ├── simulation.py
-```
-
----
-
-## Environment Setup
-
-```
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
----
-
-## Running the Simulation
-
-```
-python main.py
-```
-
-Other modes:
-
-```
-python -m experiments.baseline
-python -m experiments.market_regimes
-python -m experiments.multi_vc
-```
-
----
-
-## Outputs
-
-* `data/` → simulation results
-* `plots/` → visualizations
-* posterior vs signal plots
-* signal distributions by type
-
----
-
-## Reference Output
-
-```
-Unconditional investment rate: 0.3464
-
-By type:
-high → invest ≈ 0.877  
-low  → invest ≈ 0.055
-```
-
----
-
-## Extensions
-
-* Endogenous signaling (costly signals)
-* Multiple investors
-* Dynamic learning over time
-* Structural estimation of parameters
-
----
-
-## License
-
-Add a license before public distribution.
