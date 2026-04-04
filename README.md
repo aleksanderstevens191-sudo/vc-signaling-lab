@@ -28,8 +28,6 @@ From a baseline simulation of 5,000 funding rounds:
 * False Positive Rate: ~5.5% (bad startups funded)
 * False Negative Rate: ~12.3% (good startups rejected)
 
-This demonstrates strong separation between high- and low-quality founders while preserving realistic decision errors under uncertainty.
-
 ---
 
 ## Overview
@@ -38,19 +36,17 @@ The model is a **sender–receiver game** with asymmetric information.
 
 The founder has a hidden type:
 
-$$
-\theta \in {\text{high}, \text{low}}
-$$
+```math
+\theta \in \{\text{high}, \text{low}\}
+```
 
 A signal $s$ is generated from a type-dependent normal distribution:
 
-$$
+```math
 s \sim \mathcal{N}(\mu_\theta, \sigma^2)
-$$
+```
 
 The VC observes $s$ but not $\theta$, and must infer quality.
-
-Investment decisions are made using posterior beliefs derived from Bayes’ rule.
 
 ---
 
@@ -58,85 +54,76 @@ Investment decisions are made using posterior beliefs derived from Bayes’ rule
 
 Let the prior probability of a high-quality founder be:
 
-$$
+```math
 \pi_h = P(\theta = \text{high})
-$$
+```
 
 After observing signal $s$, the VC computes:
 
-$$
+```math
 P(\theta = \text{high} \mid s)
-==============================
-
+=
 \frac{p(s \mid \text{high}) \cdot \pi_h}{p(s)}
-$$
+```
 
 where
 
-$$
+```math
 p(s)
-====
-
+=
 p(s \mid \text{high}) \cdot \pi_h
 +
 p(s \mid \text{low}) \cdot (1 - \pi_h)
-$$
+```
 
-The likelihood $p(s \mid \theta)$ is modeled as:
+The likelihood is:
 
-$$
+```math
 s \mid \theta \sim \mathcal{N}(\mu_\theta, \sigma^2)
-$$
+```
 
 ---
 
 ## Decision Rule
 
-The baseline investment rule is:
-
-$$
+```math
 \text{Invest if } P(\theta = \text{high} \mid s) > \tau
-$$
+```
 
-where $\tau \in [0,1]$ is a decision threshold.
+where $\tau \in [0,1]$.
 
-Alternative rules can use expected returns:
+Alternative:
 
-$$
+```math
 \mathbb{E}[\text{net return} \mid s]
-$$
+```
 
 ---
 
 ## Conceptual Framework
 
-This model belongs to the class of **games with one-sided incomplete information**:
-
 * Founder observes $\theta$
 * Investor observes only $s$
-* Beliefs are updated via Bayesian inference
+* Beliefs updated via Bayesian inference
 
-Because signal distributions overlap, perfect separation is impossible. This creates realistic:
+Because signal distributions overlap:
 
-* false positives
-* false negatives
-* probabilistic decision-making
+* false positives occur
+* false negatives occur
+* decisions are probabilistic
 
 ---
 
 ## Asymmetric Information and Signaling
 
 * $\theta$ is private information
-* $s$ is informative but noisy
-* Investors form posterior beliefs using $(s, \pi)$
+* $s$ is noisy but informative
 
-Signaling arises from:
-
-$$
+```math
 s \mid \theta
-$$
+```
 
-Extensions can allow founders to **strategically choose signals**, introducing costly signaling equilibria.
+Extensions allow costly signaling strategies.
 
 ---
 
@@ -162,37 +149,26 @@ vc-game-theory-simulator/
 
 ---
 
-## Running the Simulation
+## Run
 
 ```bash
 python main.py
 ```
 
-Other modes:
+---
 
-```bash
-python -m experiments.baseline
-python -m experiments.market_regimes
-python -m experiments.multi_vc
-```
+## Output
+
+* data/ → simulation results
+* plots/ → visualizations
 
 ---
 
-## Outputs
-
-* `data/` → simulation results
-* `plots/` → visualizations
-* posterior vs signal plots
-* signal distributions by type
-
----
-
-## Reference Output
+## Example Output
 
 ```text
 Unconditional investment rate: 0.3464
 
-By type:
 high -> invest ≈ 0.877  
 low  -> invest ≈ 0.055  
 ```
@@ -201,13 +177,13 @@ low  -> invest ≈ 0.055
 
 ## Extensions
 
-* Endogenous signaling (costly signals)
-* Multiple investors
-* Dynamic learning over time
-* Structural estimation of parameters
+* Endogenous signaling
+* Multi-investor models
+* Dynamic learning
+* Structural estimation
 
 ---
 
 ## License
 
-Add a license before public distribution.
+Add a license.
