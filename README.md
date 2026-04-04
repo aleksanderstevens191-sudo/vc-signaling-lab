@@ -50,15 +50,23 @@ The baseline treats the conditional distribution of \(s\) given \(\theta\) as **
 
 ## Bayesian updating
 
-Let \(\pi_h = P(\theta = \text{high})\). After observing \(s\), the VC computes
+Let $\pi_h = P(\theta = \text{high})$. After observing signal $s$, the VC computes the posterior probability that the founder is high quality:
 
-\[
-P(\theta = \text{high} \mid s) = \frac{p(s \mid \text{high})\, \pi_h}{p(s)}, \qquad
-p(s) = p(s \mid \text{high})\,\pi_h + p(s \mid \text{low})\,(1-\pi_h).
-\]
+$$
+P(\theta = \text{high} \mid s)
+=
+\frac{p(s \mid \text{high}) \, \pi_h}{p(s)},
+\qquad
+p(s)
+=
+p(s \mid \text{high}) \, \pi_h
++
+p(s \mid \text{low}) \, (1 - \pi_h).
+$$
 
-In code, \(p(s \mid \theta)\) is Gaussian with mean \(\mu_\theta\) and variance \(\sigma^2\); the posterior is computed explicitly from likelihoods and the prior (see `game/vc.py`). The investment rule in the baseline compares \(P(\text{high} \mid s)\) to a threshold in \([0,1]\); alternative rules can be built on \(\mathbb{E}[\text{net return} \mid s]\) using the same posterior.
+In code, $p(s \mid \theta)$ is modeled as a Gaussian density with mean $\mu_\theta$ and variance $\sigma^2$. The posterior is computed explicitly from the likelihoods and the prior (see `game/vc.py`).
 
+The baseline investment rule compares $P(\theta = \text{high} \mid s)$ to a threshold in $[0,1]$. Alternative decision rules can instead be based on $\mathbb{E}[\text{net return} \mid s]$ using the same posterior.
 ---
 
 ## Repository layout
